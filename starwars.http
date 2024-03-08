@@ -1,0 +1,137 @@
+@baseUrl = http://localhost:3000
+
+# @name  CreatesAPlanet
+POST {{baseUrl}}/planets
+Content-Type: application/json
+
+{
+  "name": "Mars",
+  "population": 10000,
+  "climate": "hot",
+  "terrain": "sand",
+  "latitude": 30.45,
+  "longitude": 71
+}
+
+@planetId = uuid-planet-id
+
+# @name FindsAPlanet
+GET {{baseUrl}}/planets/{{planetId}}
+Content-Type: application/json
+
+# @name DeletesAPlanet
+DELETE  {{baseUrl}}/planets/{{planetId}}
+Content-Type: application/json
+
+# @name EditsAPlanet
+PUT {{baseUrl}}/planets/{{planetId}}
+Content-Type: application/json
+
+{
+  "name": "Earth",
+  "coordinates": "(37.33, 21.55)"
+}
+
+# @name CreatesAPlanet
+POST {{baseUrl}}/characters
+Content-Type: application/json
+
+{
+  "name": "Leia",
+  "sensitivity": 90,
+  "planetId": "{{planetId}}"
+}
+
+@characterId = uuid-character-id
+
+# @name FindsACharacter
+GET {{baseUrl}}/characters/{{characterId}}
+Content-Type: application/json
+
+
+# @name EditsACharacter
+PUT {{baseUrl}}/characters/{{characterId}}
+Content-Type: application/json
+
+{
+  "planetId": "ca6ea54e-813f-455a-a5a4-51872ad79815"
+}
+
+# @name DeletesACharacter
+DELETE  {{baseUrl}}/characters/{{characterId}}
+Content-Type: application/json
+
+# @name RelocatesACharacterToANewPlanet
+PUT {{baseUrl}}/characters.relocate/{{characterId}}
+Content-Type: application/json
+
+{
+  "to": "ca6ea54e-813f-455a-a5a4-51872ad79815"
+}
+
+
+# @name CreatesAStarship
+POST {{baseUrl}}/starships
+Content-Type: application/json
+
+{
+  "name": "starship-1",
+  "model":"any-model",
+  "capacity": 100,
+  "latitude": 10.23,
+  "longitude": 37.03
+}
+
+@starshipId = uuid-starship-id
+
+# @name GetsAStarship
+GET {{baseUrl}}/starships/{{starshipId}}
+Content-Type: application/json
+
+# @name DeletesAStarship
+DELETE {{baseUrl}}/starships/{{starshipId}}
+Content-Type: application/json
+
+# @name EditsAStarship
+PUT {{baseUrl}}/starships/{{starshipId}}
+Content-Type: application/json
+
+{
+  "enemies": ["987b6071-7038-4bfd-8f3d-9a9476317d9d", "6bee0367-8a03-43ff-a4fe-b0dd92abe520" ]
+}
+
+# @name BoardsACharacterToAStarship
+PUT {{baseUrl}}/starships.boardCharacter/{{starshipId}}
+Content-Type: application/json
+
+{
+  "characterId": "fb3c9b73-7c70-4ee9-b6e9-46dbbe30310e"
+}
+
+# @name DisembarksACharacterFromAStarship
+PUT {{baseUrl}}/starships.disembarkCharacter/{{starshipId}}
+Content-Type: application/json
+
+{
+  "characterId": "fb3c9b73-7c70-4ee9-b6e9-46dbbe30310e"
+}
+
+# @name FindsTheDistanceFromAStarshipToAPlanet
+GET {{baseUrl}}/starships.distanceToPlanet?starshipId={{starshipId}}d&planetId={{planetId}}
+Content-Type: application/json
+
+# @name FindsTheIfAStarshipCanTravelToPlanet
+GET {{baseUrl}}/starships.hasCapacityToTravel?starshipId={{starshipId}}d&planetId={{planetId}}
+Content-Type: application/json
+
+
+# 15 / 35
+# @name FindsTheNearbyEnemies
+GET {{baseUrl}}/starships.nearbyEnemies?starshipId={{starshipId}}&range=35
+Content-Type: application/json
+
+# @name SpawnsARandomNewEnemy
+PUT {{baseUrl}}/starships.spawnEnemy/{{starshipId}}
+Content-Type: application/json
+
+{}

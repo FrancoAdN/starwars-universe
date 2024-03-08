@@ -1,0 +1,15 @@
+version: '3'
+services:
+  postgres:
+    container_name: starwars-universe
+    image: postgres:14.7-alpine
+    environment:
+      POSTGRES_USER: starwars
+      POSTGRES_PASSWORD: starwars
+      POSTGRES_DB: starwars
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./db-data:/var/lib/postgresql/data
+volumes:
+  db-data:
